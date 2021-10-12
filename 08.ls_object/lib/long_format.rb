@@ -1,3 +1,7 @@
+# frozen_string_literal: true
+
+require './lib/collect_files'
+
 module LS
   class LongFormat
     MODE_TABLE = {
@@ -11,40 +15,34 @@ module LS
       '7' => 'rwx'
     }.freeze
 
-    def initialize(file_paths)
-      @file_paths = file_paths
+    def initialize(pathname)
+      @pathname = pathname
+      @collected_files = LS::CollectFiles.new(pathname)
     end
 
-    def get_info
-      row_data = @file_paths.map do |file_path|
-        stat = File::Stat.new(file_path)
-        build_data(file_path, stat)
-      end
-      block_total = row_data.sum { |data| data[:blocks] }
-      total = "total #{block_total}"
-      body = render_long_format_body(row_data)
-      [total, *body].join("\n")
+    def list
+      total = "total #{@collected_files.total_blocks}"
+      body = @collected_files.files.map do |file|
+        [
+          file.type_and_mode,
+          "  #{file.nlink.to_s.rjust(@collected_files.max_nlink_size)}",
+          " #{file.user.ljust(@collected_files.max_user_size)}",
+          "  #{file.group.ljust(@collected_files.max_group_size)}",
+          "  #{file.size.to_s.rjust(@collected_files.max_size_size)}",
+          " #{file.mtime}",
+          " #{file.basename}"
+        ].join
+      end.join("\n")
+      [total, body].join("\n")
     end
 
     private
-
-    def build_data(file_path, stat)
-      {
-        type_and_mode: format_type_and_mode(file_path),
-        nlink: stat.nlink.to_s,
-        user: Etc.getpwuid(stat.uid).name,
-        group: Etc.getgrgid(stat.gid).name,
-        size: stat.size.to_s,
-        mtime: stat.mtime.strftime('%m %e %R'),
-        basename: File.basename(file_path),
-        blocks: stat.blocks
-      }
-    end
 
     def render_long_format_body(row_data)
       max_sizes = %i[nlink user group size].map do |key|
         find_max_size(row_data, key)
       end
+      require 'byebug'; byebug
       row_data.map do |data|
         format_row(data, *max_sizes)
       end

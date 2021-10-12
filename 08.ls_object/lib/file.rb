@@ -3,7 +3,7 @@ require 'etc'
 module LS
   # ファイルについての情報を持っているクラス
   class File
-    attr_reader :file_path, :basename, :type_and_mode, :nlink, :user, :group, :size, :mtime, :blocks
+    attr_reader :max_sizes, :file_path, :basename, :type_and_mode, :nlink, :user, :group, :size, :mtime, :blocks
 
     MODE_TABLE = {
       '0' => '---',
