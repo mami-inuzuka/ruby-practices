@@ -1,0 +1,38 @@
+.header-links.is-user-links
+  ul.header-links__items
+
+    li.header-links__search.is-hidden-sm-down
+      = render 'header_search', select_id: 'header-search-select', text_field_id: 'header-search-word', submit_id: 'test-search'
+
+    li.header-links__item.is-hidden-md-up
+      label.header-links__link.test-show-menu(for='header-search')
+        .header-notification-icon
+          i.fas.fa-search
+        .header-links__link-label
+          | 検索
+
+    - if current_user
+      li.header-links__item
+        label.header-links__link.test-show-menu(for='header-menu')
+          .header-current-user
+            = image_tag current_user.avatar_url, title: current_user.icon_title, class: "header-current-user__icon a-user-icon is-#{current_user.role}"
+          .header-links__link-label
+            | Me
+        input.a-toggle-checkbox#header-menu(type='checkbox')
+        .header-dropdown
+          label.header-dropdown__background(for='header-menu')
+          .header-dropdown__inner
+            = render 'user_menu'
+            - if current_user.admin?
+              = render 'admin_menu'
+            - if admin_or_mentor_login?
+              = render 'mentor_menu'
+      li.header-links__item.is-hidden-md-up
+        label.header-links__link.test-show-menu(for='mobile-nav')
+          i.fas.fa-bars
+          .header-links__link-label Menu
+      #js-notifications-bell
+
+= render '/shared/modal', id: 'header-search', title: '検索'
+  .modal__description.is-md
+    = render 'header_search', select_id: 'header-search-select-modal', text_field_id: 'header-search-word-modal', submit_id: 'test-search-modal'

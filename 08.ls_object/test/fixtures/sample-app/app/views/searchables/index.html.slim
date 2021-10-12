@@ -1,0 +1,9 @@
+- title "'#{params[:word]}'の検索結果"
+
+header.page-header
+  .container
+    .page-header__inner
+      h2.page-header__title
+        = title
+
+#js-searchables(document_type="#{params[:document_type]}" word="#{params[:word]}")

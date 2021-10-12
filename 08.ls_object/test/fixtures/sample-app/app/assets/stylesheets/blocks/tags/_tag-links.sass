@@ -1,0 +1,26 @@
+.tag-links__items
+  display: flex
+  align-items: flex-end
+  flex-wrap: wrap
+  +margin(horizontal, -.25rem)
+  margin-bottom: -.5rem
+
+.tag-links__item
+  +margin(horizontal, .25rem)
+  margin-bottom: .5rem
+
+.tag-links__item-link
+  +text-block(.6875rem 1.45, block $main)
+  background-color: transparent
+  border: solid 1px $main
+  padding: .1875rem .625rem
+  border-radius: 2rem
+  transition: all .2s ease-in
+  text-decoration: none
+  &:hover
+    background-color: rgba($main, .2)
+
+.tag-links__item-edit
+  +text-block(.75rem 1.4, $main block)
+  +hover-link-reversal
+  cursor: pointer

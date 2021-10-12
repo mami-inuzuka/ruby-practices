@@ -1,0 +1,39 @@
+- title 'Docs'
+header.page-header
+  .container
+    .page-header__inner
+      h1.page-header__title
+        = title
+      .page-header-actions
+        ul.page-header-actions__items
+          li.page-header-actions__item
+            = link_to [:new, :page], class: 'a-button is-md is-secondary is-block' do
+              i.fas.fa-plus
+              | Doc作成
+
+- if params[:tag]
+  .page-optional-header
+    .container
+      .page-optional-header__inner
+        h2.page-optional-header__title
+          | タグ 「#{params[:tag]}」
+          = link_to pages_path, class: 'page-body__optional-title-cancel' do
+            i.fas.fa-times.fa-fw
+.page-body
+  .container.is-xl
+    = paginate @pages
+    .two-columns
+      .two-columns__inner
+        .thread-list.a-card
+          = render partial: 'pages/page', collection: @pages, as: :page
+      - if Page.all_tags.any?
+        nav.page-tags-nav
+          header.page-tags-nav__header
+            h2.page-tags-nav__title
+              | タグ一覧
+          .page-tags-nav__body
+            ul.page-tags-nav__items
+              - Page.all_tags.each do |tag|
+                li.page-tags-nav__item
+                  = link_to tag.name, pages_tag_path(tag.name), class: 'page-tags-nav__item-link'
+    = paginate @pages

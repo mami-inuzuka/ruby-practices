@@ -1,0 +1,45 @@
+- title @questions_property.title
+header.page-header
+  .container
+    .page-header__inner
+      h2.page-header__title = title
+      .page-header-actions
+        .page-header-actions__items
+          .page-header-actions__item
+            = link_to new_question_path, class: 'a-button is-md is-secondary is-block' do
+              i.fas.fa-plus
+              | 質問する
+
+= form_tag :questions, method: 'get' do
+  nav.sort-nav
+    .container
+      .sort-nav__inner
+        = hidden_field_tag :solved, params[:solved]
+        = label_tag :practice_id, 'プラクティスで絞り込む:', class: 'sort-nav__label'
+        .sort-nav__select
+          = select_tag :practice_id, options_from_collection_for_select(current_user.practices, :id, :title, selected: params[:practice_id]), include_blank: '全ての質問を表示', onchange: 'this.form.submit()', class: 'js-select2'
+  = render 'questions/tabs'
+
+.page-body
+  .container.is-lg
+    = paginate @questions
+    .two-columns
+      .two-columns__inner
+        - if @questions.present?
+          .thread-list.a-card
+            = render @questions
+        - else
+          .a-empty-message
+            = @questions_property.empty_message
+      - if @tags.any?
+        nav.page-tags-nav
+          header.page-tags-nav__header
+            h2.page-tags-nav__title
+              | タグ一覧
+          .page-tags-nav__body
+            ul.page-tags-nav__items
+              - Question.all.all_tags.each do |tag|
+                - if tag.present?
+                  li.page-tags-nav__item
+                    = link_to tag.name, questions_tag_path(tag.name, all: 'true'), class: 'page-tags-nav__item-link'
+    = paginate @questions

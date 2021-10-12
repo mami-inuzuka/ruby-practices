@@ -1,0 +1,16 @@
+- title '日報作成'
+- content_for(:extra_body_classes, 'no-recent-reports')
+header.page-header
+  .container
+    .page-header__inner
+      h2.page-header__title
+        = title
+      .page-header-actions
+        .page-header-actions__items
+          .page-header-actions__item
+            = link_to reports_path, class: 'a-button is-md is-secondary is-block is-back' do
+              | 日報一覧
+
+.page-body
+  .container.is-xxxl
+    = render 'form', report: @report, categories: @categories

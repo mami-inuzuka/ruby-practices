@@ -1,0 +1,30 @@
+.user-grass
+  padding: 1rem
+  +media-breakpoint-down(sm)
+    padding: .75rem
+  svg
+    font-size: .625rem
+    max-width: 100%
+    +margin(vertical, -1.75rem)
+    +media-breakpoint-only(sm)
+      +margin(vertical, 0)
+    +media-breakpoint-only(md)
+      +margin(vertical, 0)
+    +media-breakpoint-up(lg)
+      +margin(vertical, -.75rem)
+
+.user-data-grass
+  margin-top: 1.5rem
+  border: dashed 1px $background-shade
+  padding: 1rem
+
+.user-data-grass__image-container
+  overflow-y: auto
+  display: flex
+  justify-content: center
+  margin-top: 1rem
+  +media-breakpoint-down(sm)
+    display: block
+
+.user-grass__empty
+  +text-block(.875rem 1.45, center)

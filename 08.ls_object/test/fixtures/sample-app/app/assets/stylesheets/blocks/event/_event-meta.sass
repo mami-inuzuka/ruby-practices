@@ -1,0 +1,48 @@
+.event-meta
+  +media-breakpoint-up(md)
+    font-size: .875rem
+  +media-breakpoint-down(sm)
+    font-size: .8125rem
+  padding: 1.25rem 2rem
+  +media-breakpoint-down(sm)
+    padding: .75rem
+  &:not(:last-child)
+    padding-bottom: 0
+
+.event-meta__inner
+  padding: .75em 1em
+  background-color: $background-more-tint
+  border: solid $border-shade 1px
+
+.event-meta__item
+  line-height: 1.5
+  +media-breakpoint-up(md)
+    display: flex
+    align-items: center
+  &:not(:first-child)
+    margin-top: .5em
+    padding-top: .5em
+    border-top: dashed $border-shade 1px
+
+.event-meta__item-label
+  flex-basis: 5em
+  margin-right: .5em
+  white-space: nowrap
+  font-weight: 600
+  +media-breakpoint-up(md)
+    text-align: right
+  +media-breakpoint-down(sm)
+    font-size: .875em
+
+.event-meta__item-value
+  flex: 100
+  +media-breakpoint-up(md)
+    display: flex
+    align-items: center
+
+.event-meta__item-value-main
+  display: block
+  +media-breakpoint-up(md)
+    margin-right: .5rem
+  +media-breakpoint-down(sm)
+    margin-bottom: .25rem

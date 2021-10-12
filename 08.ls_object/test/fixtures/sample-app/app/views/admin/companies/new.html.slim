@@ -1,0 +1,12 @@
+- title '企業作成'
+
+header.page-header
+  .container
+    .page-header__inner
+      h1.page-header__title = title
+
+= render 'admin/admin_page_tabs'
+
+.page-body
+  .container.is-md
+    = render 'form', company: @company

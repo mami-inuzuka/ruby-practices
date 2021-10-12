@@ -1,0 +1,47 @@
+.pagination
+  +position(relative, 1)
+  +media-breakpoint-up(md)
+    margin-bottom: 1rem
+  +media-breakpoint-down(sm)
+    margin-bottom: .5rem
+  .container + &,
+  .thread-list + &,
+  .two-columns + &
+    +media-breakpoint-up(md)
+      margin-top: 1rem
+      margin-bottom: 0
+    +media-breakpoint-down(sm)
+      margin-top: .5rem
+      margin-bottom: 0
+
+.pagination__items
+  display: flex
+  flex-wrap: wrap
+  justify-content: center
+  +margin(horizontal, -1rem)
+  overflow-x: auto
+  -webkit-overflow-scrolling: touch
+
+.pagination__item
+  +padding(horizontal, .125rem)
+  &.is-disabled
+    opacity: .4
+    pointer-events: none
+
+.pagination__item-link
+  +size(2.5rem)
+  border-radius: 50%
+  outline: none
+  +text-block(.875rem 1, $muted-text)
+  +flex-link
+  justify-content: center
+  align-items: center
+  transition: all .2s ease-in
+  &:hover
+    background-color: rgba(black, .1)
+  &.is-active
+    background-color: $main
+    color: $reversal-text
+  .pagination__item.is-active &
+    background-color: $main
+    color: $reversal-text

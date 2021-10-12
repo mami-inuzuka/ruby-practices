@@ -1,0 +1,18 @@
+- title 'カテゴリー'
+
+header.page-header
+  .container
+    .page-header__inner
+      h1.page-header__title = title
+      .page-header-actions
+        .page-header-actions__items
+          .page-header-actions__item
+            = link_to new_admin_category_path, class: 'a-button is-md is-secondary is-block' do
+              i.fas.fa-plus
+              | カテゴリー作成
+
+.page-tools
+  = render 'admin/admin_page_tabs'
+
+.page-body
+  #js-categories(data-categories="#{@categories.to_json}")

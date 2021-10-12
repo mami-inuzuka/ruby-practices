@@ -1,0 +1,42 @@
+.thread-header-title
+  font-feature-settings: "palt"
+  letter-spacing: .02em
+  +text-block(1em 1.35, 700)
+  display: flex
+  +media-breakpoint-up(md)
+    font-size: 1.5rem
+    .has-count &
+      margin-right: 2rem
+  +media-breakpoint-down(sm)
+    font-size: 1.125rem
+    word-break: break-all
+  &.is-wip
+    color: $muted-text
+
+.thread-header-title__link
+  +hover-link
+  color: $default-text
+  .thread-header-title.is-wip &
+    color: $muted-text
+
+.thread-header-title__label
+  +text-block(.5em 1, flex nowrap 0)
+  background-color: #e9ebef
+  +padding(horizontal, 1em)
+  border-radius: .75rem
+  align-items: center
+  +position(relative, top .75em)
+  margin-right: .5em
+  +media-breakpoint-up(md)
+    height: 1.5em
+    +position(top .75em)
+  +media-breakpoint-down(sm)
+    font-size: .625rem
+    height: 1.75em
+    +position(top .375em)
+  &.is-solved
+    color: $reversal-text
+    &.is-success
+      background-color: $success
+    &.is-danger
+      background-color: $danger
