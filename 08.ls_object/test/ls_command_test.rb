@@ -117,7 +117,7 @@ class LsCommandTest < Minitest::Test
     # drwxrwxr-x  4 mami-inuzuka  staff     128 10  8 14:52 vendor
     # -rw-rw-r--  1 mami-inuzuka  staff  364177 10  8 14:52 yarn.lock
     expected = `ls -l #{TARGET_PATHNAME}`.chomp
-    assert_equal expected, LS::Ls.new(TARGET_PATHNAME, long_format: true)
+    assert_equal expected, LS::Ls.new(TARGET_PATHNAME, long_format: true).run_ls
   end
 
   def test_run_ls_reverse
@@ -127,7 +127,7 @@ class LsCommandTest < Minitest::Test
       test                    log                     config                  app                     Gemfile.lock
       public                  lib                     bin                     Rakefile                Gemfile
     TEXT
-    assert_equal expected, LS::Ls.new(TARGET_PATHNAME, width: 123, reverse: true)
+    assert_equal expected, LS::Ls.new(TARGET_PATHNAME, width: 123, reverse: true).run_ls
   end
 
   def test_run_ls_dot_match
@@ -139,11 +139,11 @@ class LsCommandTest < Minitest::Test
       .github                 Gemfile.lock            babel.config.js         log                     yarn.lock
       .gitignore              Procfile                bin                     package.json
     TEXT
-    assert_equal expected, LS::Ls.new(TARGET_PATHNAME, width: 123, dot_match: true)
+    assert_equal expected, LS::Ls.new(TARGET_PATHNAME, width: 123, dot_match: true).run_ls
   end
 
   def test_run_ls_all_options
     expected = `ls -lar #{TARGET_PATHNAME}`.chomp
-    assert_equal expected, LS::Ls.new(TARGET_PATHNAME, long_format: true, reverse: true, dot_match: true)
+    assert_equal expected, LS::Ls.new(TARGET_PATHNAME, long_format: true, reverse: true, dot_match: true).run_ls
   end
 end
