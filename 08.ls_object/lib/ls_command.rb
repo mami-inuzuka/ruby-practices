@@ -2,6 +2,7 @@
 
 require 'pathname'
 require './lib/short_format'
+require './lib/long_format'
 
 module LS
   class Ls
@@ -20,7 +21,7 @@ module LS
     end
 
     def run_ls
-      @params[:long_format] ? LS::LongFormat(@file_paths) : LS::ShortFormat.new(@file_paths, @width).get_basename
+      @params[:long_format] ? LS::LongFormat.new(@file_paths).get_info : LS::ShortFormat.new(@file_paths, @width).get_basename
     end
   end
 end
