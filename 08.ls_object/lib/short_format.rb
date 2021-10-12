@@ -1,15 +1,21 @@
+# frozen_string_literal: true
+
+require './lib/collect_files'
+
 module LS
   class ShortFormat
-    def initialize(file_path, width)
-      @file_paths = file_path
+    def initialize(pathname, width=123)
+      # pathname: "test/fixtures/sample-app"
+      @collected_files = LS::CollectFiles.new(pathname)
       @width = width
     end
 
-    def get_basename
-      max_file_path_count = @file_paths.map { |f| File.basename(f).size }.max
+    def list
+      max_file_path_count = @collected_files.max_file_path_count
+      file_paths = @collected_files.file_paths
       col_count = @width / (max_file_path_count + 7)
-      row_count = col_count.zero? ? @file_paths.count : (@file_paths.count.to_f / col_count).ceil
-      transposed_file_paths = safe_transpose(@file_paths.each_slice(row_count).to_a)
+      row_count = col_count.zero? ? file_paths.count : (file_paths.count.to_f / col_count).ceil
+      transposed_file_paths = safe_transpose(file_paths.each_slice(row_count).to_a)
       format_table(transposed_file_paths, max_file_path_count)
     end
 
@@ -25,7 +31,7 @@ module LS
 
     def render_short_format_row(row_files, max_file_path_count)
       row_files.map do |file_path|
-        basename = file_path ? File.basename(file_path) : ''
+        basename = file_path ? ::File.basename(file_path) : ''
         basename.ljust(max_file_path_count + 7)
       end.join.rstrip
     end
