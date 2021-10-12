@@ -15,9 +15,9 @@ module LS
       '7' => 'rwx'
     }.freeze
 
-    def initialize(pathname)
+    def initialize(pathname,reverse, dot_match)
       @pathname = pathname
-      @collected_files = LS::CollectFiles.new(pathname)
+      @collected_files = LS::CollectFiles.new(pathname, reverse, dot_match)
     end
 
     def list

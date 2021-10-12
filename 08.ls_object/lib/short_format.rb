@@ -4,9 +4,9 @@ require './lib/collect_files'
 
 module LS
   class ShortFormat
-    def initialize(pathname, width=123)
+    def initialize(pathname, width=123, reverse, dot_match)
       # pathname: "test/fixtures/sample-app"
-      @collected_files = LS::CollectFiles.new(pathname)
+      @collected_files = LS::CollectFiles.new(pathname, reverse, dot_match)
       @width = width
     end
 

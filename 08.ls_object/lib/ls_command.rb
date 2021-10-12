@@ -14,7 +14,7 @@ module LS
     end
 
     def run_ls
-      @params[:long_format] ? LS::LongFormat.new(@pathname).get_info : LS::ShortFormat.new(@pathname, @width).get_basename
+      @params[:long_format] ? LS::LongFormat.new(@pathname, @params[:reverse], @params[:dot_match]).list : LS::ShortFormat.new(@pathname, @width,  @params[:reverse], @params[:dot_match]).list
     end
   end
 end

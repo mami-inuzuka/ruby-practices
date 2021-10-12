@@ -20,7 +20,7 @@ module LS
 
     def collect_file_paths(pathname, dot_match, reverse)
       pattern = Pathname(pathname).join('*')
-      params = dot_match ? [pattern, File::FNM_DOTMATCH] : [pattern]
+      params = dot_match ? [pattern, ::File::FNM_DOTMATCH] : [pattern]
       file_paths = Dir.glob(*params).sort
       reverse ? file_paths.reverse : file_paths
     end
