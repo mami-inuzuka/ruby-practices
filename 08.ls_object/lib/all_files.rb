@@ -10,15 +10,15 @@ module LS
 
     def initialize(pathname:, reverse: false, dot_match: false)
       @pathname = pathname
-      @files = build_files(pathname, dot_match, reverse)
-      @file_paths = collect_file_paths(pathname, dot_match, reverse)
+      @files = build_files(pathname: pathname, dot_match: dot_match, reverse: reverse)
+      @file_paths = collect_file_paths(pathname: pathname, dot_match: dot_match, reverse: reverse)
     end
 
     def max_file_path_count
       @files.map { |file| file.basename.size }.max
     end
 
-    def collect_file_paths(pathname, dot_match, reverse)
+    def collect_file_paths(pathname:, dot_match: flase, reverse: false)
       pattern = Pathname(pathname).join('*')
       params = dot_match ? [pattern, ::File::FNM_DOTMATCH] : [pattern]
       file_paths = Dir.glob(*params).sort
@@ -47,8 +47,8 @@ module LS
 
     private
 
-    def build_files(pathname, dot_match, reverse)
-      file_paths = collect_file_paths(pathname, dot_match, reverse)
+    def build_files(pathname:, dot_match: false, reverse: false)
+      file_paths = collect_file_paths(pathname: pathname, dot_match: dot_match, reverse: reverse)
       file_paths.map do |file_path|
         LS::File.new(file_path)
       end
