@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-require './lib/short_format'
-require './lib/long_format'
 require './lib/command'
+require './lib/long_format'
+require './lib/short_format'
 
 module LS
   class Ls
