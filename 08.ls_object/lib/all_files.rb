@@ -5,7 +5,7 @@ require './lib/file'
 
 module LS
   # ファイルを集めてくるクラス
-  class CollectFiles
+  class AllFiles
     attr_reader :files, :file_paths, :collect_file_paths, :max_file_path_count, :max_nlink_size, :max_user_size, :max_group_size, :max_size_size, :total_blocks
 
     def initialize(pathname, reverse=false, dot_match=false)

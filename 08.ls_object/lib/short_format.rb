@@ -1,12 +1,12 @@
 # frozen_string_literal: true
 
-require './lib/collect_files'
+require './lib/all_files'
 
 module LS
   class ShortFormat
     def initialize(pathname, width=123, reverse, dot_match)
       # pathname: "test/fixtures/sample-app"
-      @collected_files = LS::CollectFiles.new(pathname, reverse, dot_match)
+      @collected_files = LS::AllFiles.new(pathname, reverse, dot_match)
       @width = width
     end
 
