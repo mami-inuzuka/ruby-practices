@@ -1,75 +1,41 @@
-[![Test](https://github.com/fjordllc/bootcamp/actions/workflows/test.yml/badge.svg)](https://github.com/fjordllc/bootcamp/actions/workflows/test.yml)
-[![Lint](https://github.com/fjordllc/bootcamp/actions/workflows/lint.yml/badge.svg)](https://github.com/fjordllc/bootcamp/actions/workflows/lint.yml)
-[![Create a release pull-request](https://github.com/fjordllc/bootcamp/actions/workflows/git-pr-release-action.yml/badge.svg)](https://github.com/fjordllc/bootcamp/actions/workflows/git-pr-release-action.yml)
+# ruby-practices
 
-# Bootcamp
+フィヨルドブートキャンプのRubyプラクティスの提出物をまとめるリポジトリです。
 
-プログラマー向けEラーニングシステム。
+# プラクティスを進めるにあたって
 
-## インストール
+Web上では、プラクティスを通過できる状態のソースコードがそのまま公開されていることもあります。
+正解を見てしまわないように注意しながら進めていってください。
+実力をつけていくためにも、自分自身の力でソースコードを完成させていきましょう。
 
-```
-$ bin/setup
-$ rails server
-```
+# How to use
 
-## practiceの所要時間の集計
-
-学習時間記入した日報を投稿した上で、
+1. 右上の `Fork` ボタンを押してください。
+2. `#{自分のアカウント名}/ruby-practices` が作成されます。
+3. 作業PCの任意の作業ディレクトリにて git clone してください。
 
 ```
-$ rake bootcamp:statistics:save_learning_minute_statistics
+$ git clone https://github.com/自分のアカウント名/ruby-practices.git
 ```
 
-## テスト
-
-ヘッドレスブラウザーでテスト
-
-```
-$ rails test:all
-```
-
-普通のブラウザーでテスト
+4. 各プラクティスの提出物ファイルを該当のディレクトリの中に作成してください。
+5. ソースコードが完成したら、提出前にrubocopを実行し、警告の箇所を修正してください。
+(ただし、fizzbuzz、calendar、rakeの提出時は不要です)
 
 ```
-$ HEADED=1 rails test:all
+# bowlingのディレクトリに配置したファイルをrubocopで確認する例
+# 設定ファイルとして、ルートディレクトリにある .rubocop.yml が使用されます。
+$ cd ruby-practices/04.bowling
+$ rubocop
 ```
 
-## Lint
+6. Pull Requestを作成し、URLを提出してください。
+Pull Requestの作成画面では、merge先として **自分自身のアカウントのruby-practices** を指定してください。
+また、**作成したPull Requestは提出後に確認OKをもらうまでmergeのボタンを押さないでください。**
+![Pull Request作成画面](https://user-images.githubusercontent.com/2603449/99864665-0c145c00-2be8-11eb-8501-14bd484529f2.png)
 
-次のコマンドでlintを実行します。
+# 注意点
 
-```
-$ ./bin/lint
-```
-
-実行されるlint
-
-* Ruby
-  * rubocop
-  * slim-lint
-* JavaScript
-  * eslint
-  * prettier
-* eslintの警告は以下のコマンドで修正されますが、修正されない場合は手動で修正してください。
-
-```shell
-$ eslint 'app/javascript/**/*.{js,vue}' --fix
-```
-
-* prettierの警告が出ている場合には、以下のコマンドで修正できます。
-
-```shell
-$ prettier app/javascript/**/*.{js,vue} --write
-```
-
-
-## その他
-
-- [Develop環境でログインする方法](https://github.com/fjordllc/bootcamp/wiki/Develop%E7%92%B0%E5%A2%83%E3%81%A7%E3%83%AD%E3%82%B0%E3%82%A4%E3%83%B3%E3%81%99%E3%82%8B%E6%96%B9%E6%B3%95)
-
-- [Develop環境でのメールの確認方法](https://github.com/fjordllc/bootcamp/wiki/Develop%E7%92%B0%E5%A2%83%E3%81%A7%E3%81%AE%E3%83%A1%E3%83%BC%E3%83%AB%E3%81%AE%E7%A2%BA%E8%AA%8D%E6%96%B9%E6%B3%95)
-
-- [nodeのバージョン切り替え](https://github.com/fjordllc/bootcamp/wiki/node%E3%81%AE%E3%83%90%E3%83%BC%E3%82%B8%E3%83%A7%E3%83%B3%E5%88%87%E3%82%8A%E6%9B%BF%E3%81%88)
-
-- [Rake Taskの実装方法](https://github.com/fjordllc/bootcamp/wiki/Rake-Task%E3%81%AE%E5%AE%9F%E8%A3%85%E6%96%B9%E6%B3%95)
+- [プルリクエスト形式で提出物を出す際の「これはやっちゃダメ」リスト](https://bootcamp.fjord.jp/pages/317)を一読してください。
+- 基本的に、1課題につきPull Requestは1つとします。
+- もし、誤って1つのPull Request内に複数の課題の内容を含めてしまった時、修正する方法がわからない場合は、一度リポジトリ自体を消してForkからやり直してください。

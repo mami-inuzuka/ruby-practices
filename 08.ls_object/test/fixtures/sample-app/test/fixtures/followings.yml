@@ -1,9 +1,0 @@
-following1:
-  follower: muryou
-  followed: kensyu
-  watch: true
-
-following2:
-  follower: kensyu
-  followed: muryou
-  watch: false
