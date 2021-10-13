@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require 'minitest/autorun'
-require './lib/long_format'
+require './lib/long_formatter'
 
 class LsCommandTest < Minitest::Test
   TARGET_PATHNAME = 'test/fixtures/sample-app'
@@ -20,21 +20,21 @@ class LsCommandTest < Minitest::Test
     # drwxrwxr-x   3 mami-inuzuka  staff    96 10 11 17:35 09.wc_object
     # -rw-rw-r--   1 mami-inuzuka  staff  2336 10 11 17:35 README.md
     expected = `ls -l #{TARGET_PATHNAME}`.chomp
-    assert_equal expected, LS::LongFormat.new(pathname: TARGET_PATHNAME).list
+    assert_equal expected, LS::LongFormatter.new(pathname: TARGET_PATHNAME).list
   end
 
   def test_run_ls_long_format_reverse
     expected = `ls -lr #{TARGET_PATHNAME}`.chomp
-    assert_equal expected, LS::LongFormat.new(pathname: TARGET_PATHNAME, reverse: true).list
+    assert_equal expected, LS::LongFormatter.new(pathname: TARGET_PATHNAME, reverse: true).list
   end
 
   def test_run_ls_long_format_dot_match
     expected = `ls -la #{TARGET_PATHNAME}`.chomp
-    assert_equal expected, LS::LongFormat.new(pathname: TARGET_PATHNAME, dot_match: true).list
+    assert_equal expected, LS::LongFormatter.new(pathname: TARGET_PATHNAME, dot_match: true).list
   end
 
   def test_run_ls_long_format_all
     expected = `ls -lar #{TARGET_PATHNAME}`.chomp
-    assert_equal expected, LS::LongFormat.new(pathname: TARGET_PATHNAME, reverse: true, dot_match: true).list
+    assert_equal expected, LS::LongFormatter.new(pathname: TARGET_PATHNAME, reverse: true, dot_match: true).list
   end
 end

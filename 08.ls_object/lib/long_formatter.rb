@@ -3,7 +3,7 @@
 require './lib/file_collector'
 
 module LS
-  class LongFormat
+  class LongFormatter
     MODE_TABLE = {
       '0' => '---',
       '1' => '-x-',
