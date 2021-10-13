@@ -1,7 +1,6 @@
 require 'etc'
 
 module LS
-  # ファイルについての情報を持っているクラス
   class File
     attr_reader :max_sizes, :file_path, :basename, :type_and_mode, :nlink, :user, :group, :size, :mtime, :blocks
 
@@ -18,15 +17,15 @@ module LS
 
     def initialize(file_path)
       stat = ::File::Stat.new(file_path)
-      @file_path = file_path
       @basename = ::File.basename(file_path)
-      @type_and_mode = format_type_and_mode(file_path)
-      @nlink = stat.nlink
-      @user = Etc.getpwuid(stat.uid).name
-      @group = Etc.getgrgid(stat.gid).name
-      @size = stat.size
-      @mtime = stat.mtime.strftime('%m %e %R')
       @blocks = stat.blocks
+      @file_path = file_path
+      @group = Etc.getgrgid(stat.gid).name
+      @mtime = stat.mtime.strftime('%m %e %R')
+      @nlink = stat.nlink
+      @size = stat.size
+      @type_and_mode = format_type_and_mode(file_path)
+      @user = Etc.getpwuid(stat.uid).name
     end
 
     private
