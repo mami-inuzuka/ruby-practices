@@ -4,13 +4,15 @@ require 'pathname'
 require './lib/short_format'
 require './lib/long_format'
 require './lib/file'
+require './lib/command'
 
 module LS
   class Ls
-    def initialize(pathname, width: 123, long_format: false, reverse: false, dot_match: false)
-      @pathname = pathname # "test/fixtures/sample-app"
-      @width = width
-      @params = { long_format: long_format, reverse: reverse, dot_match: dot_match }
+    def initialize(argv)
+      command = Command.new(ARGV)
+      @pathname = command.pathname # "test/fixtures/sample-app"
+      @width = command.window_width
+      @params = command.options
     end
 
     def run_ls
