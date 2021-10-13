@@ -5,45 +5,41 @@ require 'pathname'
 require './lib/file'
 
 class LsFileTest < Minitest::Test
-  TARGET_PATHNAME = 'test/fixtures/sample-app/Gemfile'
-  # => <Pathname:test/fixtures/sample-app/Gemfile>
+  TARGET_PATHNAME = 'test/fixtures/sample-app/README.md'
+
+  def setup
+    @file = LS::File.new(TARGET_PATHNAME)
+  end
+
   def test_file_path
-    ls = LS::File.new(TARGET_PATHNAME)
-    assert_equal "test/fixtures/sample-app/Gemfile", ls.file_path
+    assert_equal "test/fixtures/sample-app/README.md", @file.file_path
   end
 
   def test_basename
-    ls = LS::File.new(TARGET_PATHNAME)
-    assert_equal "Gemfile", ls.basename
+    assert_equal "README.md", @file.basename
   end
 
   def test_type_and_mode
-    ls = LS::File.new(TARGET_PATHNAME)
-    assert_equal "-rw-rw-r--", ls.type_and_mode
+    assert_equal "-rw-rw-r--", @file.type_and_mode
   end
 
   def test_nlink
-    ls = LS::File.new(TARGET_PATHNAME)
-    assert_equal 1, ls.nlink
+    assert_equal 1, @file.nlink
   end
 
   def test_user
-    ls = LS::File.new(TARGET_PATHNAME)
-    assert_equal "mami-inuzuka", ls.user
+    assert_equal "mami-inuzuka", @file.user
   end
 
   def test_group
-    ls = LS::File.new(TARGET_PATHNAME)
-    assert_equal "staff", ls.group
+    assert_equal "staff", @file.group
   end
 
   def test_size
-    ls = LS::File.new(TARGET_PATHNAME)
-    assert_equal 2049, ls.size
+    assert_equal 2336, @file.size
   end
 
   def test_mtime
-    ls = LS::File.new(TARGET_PATHNAME)
-    assert_equal "10  8 14:52", ls.mtime
+    assert_equal "10 11 17:35", @file.mtime
   end
 end
