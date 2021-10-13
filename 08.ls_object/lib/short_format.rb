@@ -1,13 +1,13 @@
 # frozen_string_literal: true
 
-require './lib/all_files'
+require './lib/file_collector'
 
 module LS
   class ShortFormat
     MARGIN_BETWEEN_FILE_NAME = 7
 
     def initialize(pathname:, width:, reverse: false, dot_match: false)
-      @all_files = LS::AllFiles.new(pathname: pathname, reverse: reverse, dot_match: dot_match)
+      @all_files = LS::FileCollector.new(pathname: pathname, reverse: reverse, dot_match: dot_match)
       @width = width
     end
 

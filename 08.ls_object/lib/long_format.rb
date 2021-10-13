@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require './lib/all_files'
+require './lib/file_collector'
 
 module LS
   class LongFormat
@@ -17,7 +17,7 @@ module LS
 
     def initialize(pathname:, reverse: false, dot_match: false)
       @pathname = pathname
-      @all_files = LS::AllFiles.new(pathname: pathname, reverse: reverse, dot_match: dot_match)
+      @all_files = LS::FileCollector.new(pathname: pathname, reverse: reverse, dot_match: dot_match)
     end
 
     def list
