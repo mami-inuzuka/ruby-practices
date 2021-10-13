@@ -33,7 +33,7 @@ class LsCommandTest < Minitest::Test
     assert_equal expected, LS::LongFormatter.new(pathname: TARGET_PATHNAME, dot_match: true).list
   end
 
-  def test_run_ls_long_format_all
+  def test_run_ls_long_format_reverse_and_dot_match
     expected = `ls -lar #{TARGET_PATHNAME}`.chomp
     assert_equal expected, LS::LongFormatter.new(pathname: TARGET_PATHNAME, reverse: true, dot_match: true).list
   end
