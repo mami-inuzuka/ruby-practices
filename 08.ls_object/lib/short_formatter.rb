@@ -7,7 +7,7 @@ module LS
     MARGIN_BETWEEN_FILE_NAME = 7
 
     def initialize(pathname:, width:, reverse: false, dot_match: false)
-      @all_files = LS::FileCollector.new(pathname: pathname, reverse: reverse, dot_match: dot_match)
+      @collected_files = LS::FileCollector.new(pathname: pathname, reverse: reverse, dot_match: dot_match)
       @width = width
     end
 
@@ -24,7 +24,7 @@ module LS
     end
 
     def max_file_path_count
-      @all_files.max_length_list[:basename]
+      @collected_files.max_length_list[:basename]
     end
 
     def render_short_format_row(row_files, max_file_path_count)
@@ -39,7 +39,7 @@ module LS
     end
 
     def transposed_file_paths
-      file_paths = @all_files.file_paths
+      file_paths = @collected_files.paths
       col_count = @width / (max_file_path_count + MARGIN_BETWEEN_FILE_NAME)
       row_count = col_count.zero? ? file_paths.count : (file_paths.count.to_f / col_count).ceil
       safe_transpose(file_paths.each_slice(row_count).to_a)

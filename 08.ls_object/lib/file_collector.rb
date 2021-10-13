@@ -5,11 +5,11 @@ require './lib/file'
 
 module LS
   class FileCollector
-    attr_reader :collected_files, :file_paths, :max_length_list, :total_blocks
+    attr_reader :files, :paths, :max_length_list, :total_blocks
 
     def initialize(pathname:, reverse: false, dot_match: false)
-      @collected_files = collect_files(pathname: pathname, dot_match: dot_match, reverse: reverse)
-      @file_paths = collect_file_paths(pathname: pathname, dot_match: dot_match, reverse: reverse)
+      @files = collect_files(pathname: pathname, dot_match: dot_match, reverse: reverse)
+      @paths = collect_file_paths(pathname: pathname, dot_match: dot_match, reverse: reverse)
     end
 
     def max_length_list
@@ -23,13 +23,13 @@ module LS
     end
 
     def total_blocks
-      @collected_files.map { |file| file.blocks }.sum
+      @files.map { |file| file.blocks }.sum
     end
 
     private
 
     def find_max_size(key)
-      @collected_files.map { |file| file.send(key).to_s.size }.max
+      @files.map { |file| file.send(key).to_s.size }.max
     end
 
     def collect_file_paths(pathname:, dot_match: flase, reverse: false)
