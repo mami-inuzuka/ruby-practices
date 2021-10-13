@@ -24,7 +24,7 @@ module LS
     end
 
     def max_file_path_count
-      @all_files.max_file_path_count
+      @all_files.max_length_list[:basename]
     end
 
     def render_short_format_row(row_files, max_file_path_count)

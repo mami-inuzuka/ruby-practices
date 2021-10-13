@@ -5,31 +5,21 @@ require './lib/file'
 
 module LS
   class FileCollector
-    attr_reader :collected_files, :file_paths, :max_file_path_count, :max_nlink_size, :max_user_size, :max_group_size, :max_size_size, :total_blocks
+    attr_reader :collected_files, :file_paths, :max_file_path_count, :max_length_list, :total_blocks
 
     def initialize(pathname:, reverse: false, dot_match: false)
       @collected_files = collect_files(pathname: pathname, dot_match: dot_match, reverse: reverse)
       @file_paths = collect_file_paths(pathname: pathname, dot_match: dot_match, reverse: reverse)
     end
 
-    def max_file_path_count
-      @collected_files.map { |file| file.basename.size }.max
-    end
-
-    def max_nlink_size
-      @collected_files.map { |file| file.nlink.to_s.size }.max
-    end
-
-    def max_user_size
-      @collected_files.map { |file| file.user.to_s.size }.max
-    end
-
-    def max_group_size
-      @collected_files.map { |file| file.group.to_s.size }.max
-    end
-
-    def max_size_size
-      @collected_files.map { |file| file.size.to_s.size }.max
+    def max_length_list
+      {
+        basename: find_max_size(:basename),
+        nlink: find_max_size(:nlink),
+        user: find_max_size(:user),
+        group: find_max_size(:group),
+        size: find_max_size(:size),
+      }
     end
 
     def total_blocks
@@ -37,6 +27,10 @@ module LS
     end
 
     private
+
+    def find_max_size(key)
+      @collected_files.map { |file| file.send(key).to_s.size }.max
+    end
 
     def collect_file_paths(pathname:, dot_match: flase, reverse: false)
       pattern = Pathname(pathname).join('*')
