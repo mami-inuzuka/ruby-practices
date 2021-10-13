@@ -22,4 +22,3 @@ module LS
     end
   end
 end
-

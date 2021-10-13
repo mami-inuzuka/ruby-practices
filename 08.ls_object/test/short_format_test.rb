@@ -113,5 +113,4 @@ class ShortFormatTest < Minitest::Test
     TEXT
     assert_equal expected, LS::ShortFormat.new(pathname: TARGET_PATHNAME, width: 123, dot_match: true).list
   end
-
 end
