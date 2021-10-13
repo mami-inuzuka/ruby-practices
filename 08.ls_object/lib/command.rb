@@ -7,10 +7,10 @@ require './lib/short_format'
 
 module LS
   class Command
-    attr_reader :params, :pathname, :window_width
+    attr_reader :params
 
     def initialize(argv)
-      @params = self.options
+      @params = set_params
     end
 
     def execute
@@ -21,6 +21,8 @@ module LS
       end
     end
 
+    private
+
     def pathname
       ARGV[0] || '.'
     end
@@ -29,9 +31,7 @@ module LS
       IO.console.winsize[1]
     end
 
-    private
-
-    def options
+    def set_params
       params = { long_format: false, reverse: false, dot_match: false }
       opt = OptionParser.new
       opt.on('-a') { |v| params[:dot_match] = v }
