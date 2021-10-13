@@ -5,10 +5,10 @@ require 'optparse'
 
 module LS
   class Command
-    attr_reader :options, :pathname, :window_width
+    attr_reader :params, :pathname, :window_width
 
     def initialize(argv)
-      @params = options
+      @params = self.options
     end
 
     def window_width
@@ -18,6 +18,8 @@ module LS
     def pathname
       ARGV[0] || '.'
     end
+
+    private
 
     def options
       params = { long_format: false, reverse: false, dot_match: false }
