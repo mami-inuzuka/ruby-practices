@@ -15,10 +15,10 @@ module LS
     def max_length_list
       {
         basename: find_max_size(:basename),
-        nlink: find_max_size(:nlink),
-        user: find_max_size(:user),
         group: find_max_size(:group),
+        nlink: find_max_size(:nlink),
         size: find_max_size(:size),
+        user: find_max_size(:user)
       }
     end
 
