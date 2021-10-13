@@ -17,18 +17,18 @@ module LS
 
     def initialize(pathname:, reverse: false, dot_match: false)
       @pathname = pathname
-      @collected_files = LS::AllFiles.new(pathname: pathname, reverse: reverse, dot_match: dot_match)
+      @all_files = LS::AllFiles.new(pathname: pathname, reverse: reverse, dot_match: dot_match)
     end
 
     def list
-      total = "total #{@collected_files.total_blocks}"
-      body = @collected_files.files.map do |file|
+      total = "total #{@all_files.total_blocks}"
+      body = @all_files.collected_files.map do |file|
         [
           file.type_and_mode,
-          "  #{file.nlink.to_s.rjust(@collected_files.max_nlink_size)}",
-          " #{file.user.ljust(@collected_files.max_user_size)}",
-          "  #{file.group.ljust(@collected_files.max_group_size)}",
-          "  #{file.size.to_s.rjust(@collected_files.max_size_size)}",
+          "  #{file.nlink.to_s.rjust(@all_files.max_nlink_size)}",
+          " #{file.user.ljust(@all_files.max_user_size)}",
+          "  #{file.group.ljust(@all_files.max_group_size)}",
+          "  #{file.size.to_s.rjust(@all_files.max_size_size)}",
           " #{file.mtime}",
           " #{file.basename}"
         ].join
