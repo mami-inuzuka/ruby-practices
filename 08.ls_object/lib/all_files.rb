@@ -8,7 +8,7 @@ module LS
   class AllFiles
     attr_reader :files, :file_paths, :collect_file_paths, :max_file_path_count, :max_nlink_size, :max_user_size, :max_group_size, :max_size_size, :total_blocks
 
-    def initialize(pathname, reverse=false, dot_match=false)
+    def initialize(pathname:, reverse: false, dot_match: false)
       @pathname = pathname
       @files = build_files(pathname, dot_match, reverse)
       @file_paths = collect_file_paths(pathname, dot_match, reverse)
