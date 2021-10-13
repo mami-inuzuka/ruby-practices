@@ -2,6 +2,8 @@
 
 require 'io/console'
 require 'optparse'
+require './lib/long_format'
+require './lib/short_format'
 
 module LS
   class Command
@@ -9,6 +11,14 @@ module LS
 
     def initialize(argv)
       @params = self.options
+    end
+
+    def execute
+      if @params[:long_format]
+        LS::LongFormat.new(pathname: pathname, reverse: @params[:reverse], dot_match: @params[:dot_match]).list
+      else
+        LS::ShortFormat.new(pathname: pathname, width: window_width,  reverse: @params[:reverse], dot_match: @params[:dot_match]).list
+      end
     end
 
     def pathname

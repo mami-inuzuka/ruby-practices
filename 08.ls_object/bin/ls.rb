@@ -3,4 +3,4 @@
 
 require './lib/ls'
 
-puts LS::Ls.new(ARGV).execute
+puts LS::Command.new(ARGV).execute
