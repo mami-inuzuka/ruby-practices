@@ -4,6 +4,8 @@ require './lib/all_files'
 
 module LS
   class ShortFormat
+    MARGIN_BETWEEN_FILES = 7
+
     def initialize(pathname:, width:, reverse: false, dot_match: false)
       @collected_files = LS::AllFiles.new(pathname: pathname, reverse: reverse, dot_match: dot_match)
       @width = width
@@ -28,7 +30,7 @@ module LS
     def render_short_format_row(row_files, max_file_path_count)
       row_files.map do |file_path|
         basename = file_path ? ::File.basename(file_path) : ''
-        basename.ljust(max_file_path_count + 7)
+        basename.ljust(max_file_path_count + MARGIN_BETWEEN_FILES)
       end.join.rstrip
     end
 
@@ -38,7 +40,7 @@ module LS
 
     def transposed_file_paths
       file_paths = @collected_files.file_paths
-      col_count = @width / (max_file_path_count + 7)
+      col_count = @width / (max_file_path_count + MARGIN_BETWEEN_FILES)
       row_count = col_count.zero? ? file_paths.count : (file_paths.count.to_f / col_count).ceil
       safe_transpose(file_paths.each_slice(row_count).to_a)
     end
