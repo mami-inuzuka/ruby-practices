@@ -5,7 +5,7 @@ require './lib/file'
 
 module LS
   class FileCollector
-    attr_reader :collected_files, :file_paths, :max_file_path_count, :max_length_list, :total_blocks
+    attr_reader :collected_files, :file_paths, :max_length_list, :total_blocks
 
     def initialize(pathname:, reverse: false, dot_match: false)
       @collected_files = collect_files(pathname: pathname, dot_match: dot_match, reverse: reverse)
