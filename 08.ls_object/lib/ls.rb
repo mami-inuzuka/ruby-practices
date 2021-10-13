@@ -14,7 +14,11 @@ module LS
     end
 
     def execute
-      @params[:long_format] ? LS::LongFormat.new(pathname: @pathname, reverse: @params[:reverse], dot_match: @params[:dot_match]).list : LS::ShortFormat.new(pathname: @pathname, width: @width,  reverse: @params[:reverse], dot_match: @params[:dot_match]).list
+      if @params[:long_format]
+        LS::LongFormat.new(pathname: @pathname, reverse: @params[:reverse], dot_match: @params[:dot_match]).list
+      else
+        LS::ShortFormat.new(pathname: @pathname, width: @width,  reverse: @params[:reverse], dot_match: @params[:dot_match]).list
+      end
     end
   end
 end
