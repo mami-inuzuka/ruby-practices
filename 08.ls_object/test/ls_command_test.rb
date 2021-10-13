@@ -5,7 +5,7 @@ require './lib/ls_command'
 require 'pathname'
 
 class LsCommandTest < Minitest::Test
-  TARGET_PATHNAME = Pathname('test/fixtures/sample-app')
+  TARGET_PATHNAME = 'test/fixtures/sample-app'
 
   def test_run_ls_width_123
     expected = <<~TEXT.chomp
