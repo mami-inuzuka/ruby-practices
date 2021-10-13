@@ -8,9 +8,9 @@ module LS
   class Ls
     def initialize(argv)
       command = LS::Command.new(ARGV)
-      @pathname = command.pathname # "test/fixtures/sample-app"
-      @width = command.window_width
+      @pathname = command.pathname
       @params = command.params
+      @width = command.window_width
     end
 
     def execute
