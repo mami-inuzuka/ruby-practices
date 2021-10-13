@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require 'minitest/autorun'
-require './lib/ls_command'
+require './lib/ls'
 require 'pathname'
 
 class LsCommandTest < Minitest::Test
@@ -30,6 +30,6 @@ class LsCommandTest < Minitest::Test
     # drwxrwxr-x  4 mami-inuzuka  staff     128 10  8 14:52 vendor
     # -rw-rw-r--  1 mami-inuzuka  staff  364177 10  8 14:52 yarn.lock
     expected = `ls -l #{TARGET_PATHNAME}`.chomp
-    assert_equal expected, LS::LongFormat.new(TARGET_PATHNAME).list
+    assert_equal expected, LS::LongFormat.new(pathname: TARGET_PATHNAME).list
   end
 end
