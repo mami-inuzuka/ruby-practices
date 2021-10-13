@@ -35,47 +35,5 @@ module LS
       end.join("\n")
       [total, body].join("\n")
     end
-
-    private
-
-    def render_long_format_body(row_data)
-      max_sizes = %i[nlink user group size].map do |key|
-        find_max_size(row_data, key)
-      end
-      require 'byebug'; byebug
-      row_data.map do |data|
-        format_row(data, *max_sizes)
-      end
-    end
-
-    def find_max_size(row_data, key)
-      row_data.map { |data| data[key].size }.max
-    end
-
-    def format_type_and_mode(file_path)
-      pathname = Pathname(file_path)
-      type = pathname.directory? ? 'd' : '-'
-      mode = format_mode(pathname.stat.mode)
-      "#{type}#{mode}"
-    end
-
-    def format_row(data, max_nlink, max_user, max_group, max_size)
-      [
-        data[:type_and_mode],
-        "  #{data[:nlink].rjust(max_nlink)}",
-        " #{data[:user].ljust(max_user)}",
-        "  #{data[:group].ljust(max_group)}",
-        "  #{data[:size].rjust(max_size)}",
-        " #{data[:mtime]}",
-        " #{data[:basename]}"
-      ].join
-    end
-
-    def format_mode(mode)
-      digits = mode.to_s(8)[-3..-1]
-      digits.each_char.map do |c|
-        MODE_TABLE[c]
-      end.join
-    end
   end
 end
