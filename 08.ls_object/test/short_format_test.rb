@@ -6,111 +6,97 @@ require './lib/short_format'
 class ShortFormatTest < Minitest::Test
   TARGET_PATHNAME = 'test/fixtures/sample-app'
 
-  def test_run_ls_width_123
+  def test_run_ls_width_150
     expected = <<~TEXT.chomp
-      Gemfile                 Rakefile                bin                     lib                     public
-      Gemfile.lock            app                     config                  log                     test
-      Procfile                app.json                config.ru               package.json            vendor
-      README.md               babel.config.js         db                      postcss.config.js       yarn.lock
+      01.fizzbuzz             03.rake                 05.ls                   07.bowling_object       09.wc_object
+      02.calendar             04.bowling              06.wc                   08.ls_object            README.md
     TEXT
-    assert_equal expected, LS::ShortFormat.new(pathname: TARGET_PATHNAME, width: 123).list
+    assert_equal expected, LS::ShortFormat.new(pathname: TARGET_PATHNAME, width: 150).list
   end
 
-  def test_run_ls_width_106
+  def test_run_ls_width_100
     expected = <<~TEXT.chomp
-      Gemfile                 app                     config.ru               postcss.config.js
-      Gemfile.lock            app.json                db                      public
-      Procfile                babel.config.js         lib                     test
-      README.md               bin                     log                     vendor
-      Rakefile                config                  package.json            yarn.lock
+      01.fizzbuzz             04.bowling              07.bowling_object       README.md
+      02.calendar             05.ls                   08.ls_object
+      03.rake                 06.wc                   09.wc_object
     TEXT
-    assert_equal expected, LS::ShortFormat.new(pathname: TARGET_PATHNAME, width: 106).list
+    assert_equal expected, LS::ShortFormat.new(pathname: TARGET_PATHNAME, width: 100).list
   end
 
-  def test_run_ls_width_72
+  def test_run_ls_width_80
     expected = <<~TEXT.chomp
-      Gemfile                 babel.config.js         package.json
-      Gemfile.lock            bin                     postcss.config.js
-      Procfile                config                  public
-      README.md               config.ru               test
-      Rakefile                db                      vendor
-      app                     lib                     yarn.lock
-      app.json                log
+      01.fizzbuzz             05.ls                   09.wc_object
+      02.calendar             06.wc                   README.md
+      03.rake                 07.bowling_object
+      04.bowling              08.ls_object
     TEXT
-    assert_equal expected, LS::ShortFormat.new(pathname: TARGET_PATHNAME, width: 72).list
+    assert_equal expected, LS::ShortFormat.new(pathname: TARGET_PATHNAME, width: 80).list
   end
 
-  def test_run_ls_width_37
+  def test_run_ls_width_50
     expected = <<~TEXT.chomp
-      Gemfile
-      Gemfile.lock
-      Procfile
+      01.fizzbuzz             06.wc
+      02.calendar             07.bowling_object
+      03.rake                 08.ls_object
+      04.bowling              09.wc_object
+      05.ls                   README.md
+    TEXT
+    assert_equal expected, LS::ShortFormat.new(pathname: TARGET_PATHNAME, width: 50).list
+  end
+
+  def test_run_ls_width_40
+    expected = <<~TEXT.chomp
+      01.fizzbuzz
+      02.calendar
+      03.rake
+      04.bowling
+      05.ls
+      06.wc
+      07.bowling_object
+      08.ls_object
+      09.wc_object
       README.md
-      Rakefile
-      app
-      app.json
-      babel.config.js
-      bin
-      config
-      config.ru
-      db
-      lib
-      log
-      package.json
-      postcss.config.js
-      public
-      test
-      vendor
-      yarn.lock
     TEXT
-    assert_equal expected, LS::ShortFormat.new(pathname: TARGET_PATHNAME, width: 37).list
+    assert_equal expected, LS::ShortFormat.new(pathname: TARGET_PATHNAME, width: 40).list
   end
 
   def test_run_ls_width_1
     expected = <<~TEXT.chomp
-      Gemfile
-      Gemfile.lock
-      Procfile
+      01.fizzbuzz
+      02.calendar
+      03.rake
+      04.bowling
+      05.ls
+      06.wc
+      07.bowling_object
+      08.ls_object
+      09.wc_object
       README.md
-      Rakefile
-      app
-      app.json
-      babel.config.js
-      bin
-      config
-      config.ru
-      db
-      lib
-      log
-      package.json
-      postcss.config.js
-      public
-      test
-      vendor
-      yarn.lock
     TEXT
     assert_equal expected, LS::ShortFormat.new(pathname: TARGET_PATHNAME, width: 1).list
   end
 
   def test_run_ls_reverse
     expected = <<~TEXT.chomp
-      yarn.lock               postcss.config.js       db                      babel.config.js         README.md
-      vendor                  package.json            config.ru               app.json                Procfile
-      test                    log                     config                  app                     Gemfile.lock
-      public                  lib                     bin                     Rakefile                Gemfile
+      README.md               08.ls_object            06.wc                   04.bowling              02.calendar
+      09.wc_object            07.bowling_object       05.ls                   03.rake                 01.fizzbuzz
     TEXT
-    assert_equal expected, LS::ShortFormat.new(pathname: TARGET_PATHNAME, width: 123, reverse: true).list
+    assert_equal expected, LS::ShortFormat.new(pathname: TARGET_PATHNAME, width: 150, reverse: true).list
   end
 
   def test_run_ls_dot_match
     expected = <<~TEXT.chomp
-      .                       .node-version           README.md               config                  postcss.config.js
-      ..                      .rubocop.yml            Rakefile                config.ru               public
-      .browserslistrc         .ruby-version           app                     db                      test
-      .eslintrc               Gemfile                 app.json                lib                     vendor
-      .github                 Gemfile.lock            babel.config.js         log                     yarn.lock
-      .gitignore              Procfile                bin                     package.json
+      .                       01.fizzbuzz             03.rake                 05.ls                   07.bowling_object       09.wc_object
+      ..                      02.calendar             04.bowling              06.wc                   08.ls_object            README.md
     TEXT
-    assert_equal expected, LS::ShortFormat.new(pathname: TARGET_PATHNAME, width: 123, dot_match: true).list
+    assert_equal expected, LS::ShortFormat.new(pathname: TARGET_PATHNAME, width: 150, dot_match: true).list
+  end
+
+  def test_run_ls_reverse_and_dot_match
+    expected = <<~TEXT.chomp
+      README.md               08.ls_object            06.wc                   04.bowling              02.calendar             ..
+      09.wc_object            07.bowling_object       05.ls                   03.rake                 01.fizzbuzz             .
+    TEXT
+    assert_equal expected, LS::ShortFormat.new(pathname: TARGET_PATHNAME, width: 150, dot_match: true, reverse: true).list
   end
 end
