@@ -16,7 +16,6 @@ module LS
     }.freeze
 
     def initialize(pathname:, reverse: false, dot_match: false)
-      @pathname = pathname
       @collected_files = LS::FileCollector.new(pathname: pathname, reverse: reverse, dot_match: dot_match)
     end
 
