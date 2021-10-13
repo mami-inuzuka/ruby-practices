@@ -3,7 +3,7 @@
 require 'io/console'
 require 'optparse'
 require './lib/long_format'
-require './lib/short_format'
+require './lib/short_formatter'
 
 module LS
   class Command
@@ -17,7 +17,7 @@ module LS
       if @params[:long_format]
         LS::LongFormat.new(pathname: pathname, reverse: @params[:reverse], dot_match: @params[:dot_match]).list
       else
-        LS::ShortFormat.new(pathname: pathname, width: window_width,  reverse: @params[:reverse], dot_match: @params[:dot_match]).list
+        LS::ShortFormatter.new(pathname: pathname, width: window_width,  reverse: @params[:reverse], dot_match: @params[:dot_match]).list
       end
     end
 

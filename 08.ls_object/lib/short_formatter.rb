@@ -3,7 +3,7 @@
 require './lib/file_collector'
 
 module LS
-  class ShortFormat
+  class ShortFormatter
     MARGIN_BETWEEN_FILE_NAME = 7
 
     def initialize(pathname:, width:, reverse: false, dot_match: false)

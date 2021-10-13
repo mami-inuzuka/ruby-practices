@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require 'minitest/autorun'
-require './lib/short_format'
+require './lib/short_formatter'
 
 class ShortFormatTest < Minitest::Test
   TARGET_PATHNAME = 'test/fixtures/sample-app'
@@ -11,7 +11,7 @@ class ShortFormatTest < Minitest::Test
       01.fizzbuzz             03.rake                 05.ls                   07.bowling_object       09.wc_object
       02.calendar             04.bowling              06.wc                   08.ls_object            README.md
     TEXT
-    assert_equal expected, LS::ShortFormat.new(pathname: TARGET_PATHNAME, width: 150).list
+    assert_equal expected, LS::ShortFormatter.new(pathname: TARGET_PATHNAME, width: 150).list
   end
 
   def test_run_ls_width_100
@@ -20,7 +20,7 @@ class ShortFormatTest < Minitest::Test
       02.calendar             05.ls                   08.ls_object
       03.rake                 06.wc                   09.wc_object
     TEXT
-    assert_equal expected, LS::ShortFormat.new(pathname: TARGET_PATHNAME, width: 100).list
+    assert_equal expected, LS::ShortFormatter.new(pathname: TARGET_PATHNAME, width: 100).list
   end
 
   def test_run_ls_width_80
@@ -30,7 +30,7 @@ class ShortFormatTest < Minitest::Test
       03.rake                 07.bowling_object
       04.bowling              08.ls_object
     TEXT
-    assert_equal expected, LS::ShortFormat.new(pathname: TARGET_PATHNAME, width: 80).list
+    assert_equal expected, LS::ShortFormatter.new(pathname: TARGET_PATHNAME, width: 80).list
   end
 
   def test_run_ls_width_50
@@ -41,7 +41,7 @@ class ShortFormatTest < Minitest::Test
       04.bowling              09.wc_object
       05.ls                   README.md
     TEXT
-    assert_equal expected, LS::ShortFormat.new(pathname: TARGET_PATHNAME, width: 50).list
+    assert_equal expected, LS::ShortFormatter.new(pathname: TARGET_PATHNAME, width: 50).list
   end
 
   def test_run_ls_width_40
@@ -57,7 +57,7 @@ class ShortFormatTest < Minitest::Test
       09.wc_object
       README.md
     TEXT
-    assert_equal expected, LS::ShortFormat.new(pathname: TARGET_PATHNAME, width: 40).list
+    assert_equal expected, LS::ShortFormatter.new(pathname: TARGET_PATHNAME, width: 40).list
   end
 
   def test_run_ls_width_1
@@ -73,7 +73,7 @@ class ShortFormatTest < Minitest::Test
       09.wc_object
       README.md
     TEXT
-    assert_equal expected, LS::ShortFormat.new(pathname: TARGET_PATHNAME, width: 1).list
+    assert_equal expected, LS::ShortFormatter.new(pathname: TARGET_PATHNAME, width: 1).list
   end
 
   def test_run_ls_reverse
@@ -81,7 +81,7 @@ class ShortFormatTest < Minitest::Test
       README.md               08.ls_object            06.wc                   04.bowling              02.calendar
       09.wc_object            07.bowling_object       05.ls                   03.rake                 01.fizzbuzz
     TEXT
-    assert_equal expected, LS::ShortFormat.new(pathname: TARGET_PATHNAME, width: 150, reverse: true).list
+    assert_equal expected, LS::ShortFormatter.new(pathname: TARGET_PATHNAME, width: 150, reverse: true).list
   end
 
   def test_run_ls_dot_match
@@ -89,7 +89,7 @@ class ShortFormatTest < Minitest::Test
       .                       01.fizzbuzz             03.rake                 05.ls                   07.bowling_object       09.wc_object
       ..                      02.calendar             04.bowling              06.wc                   08.ls_object            README.md
     TEXT
-    assert_equal expected, LS::ShortFormat.new(pathname: TARGET_PATHNAME, width: 150, dot_match: true).list
+    assert_equal expected, LS::ShortFormatter.new(pathname: TARGET_PATHNAME, width: 150, dot_match: true).list
   end
 
   def test_run_ls_reverse_and_dot_match
@@ -97,6 +97,6 @@ class ShortFormatTest < Minitest::Test
       README.md               08.ls_object            06.wc                   04.bowling              02.calendar             ..
       09.wc_object            07.bowling_object       05.ls                   03.rake                 01.fizzbuzz             .
     TEXT
-    assert_equal expected, LS::ShortFormat.new(pathname: TARGET_PATHNAME, width: 150, dot_match: true, reverse: true).list
+    assert_equal expected, LS::ShortFormatter.new(pathname: TARGET_PATHNAME, width: 150, dot_match: true, reverse: true).list
   end
 end
