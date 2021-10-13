@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
 require 'minitest/autorun'
-require './lib/ls'
-require 'pathname'
+require './lib/long_format'
 
 class LsCommandTest < Minitest::Test
   TARGET_PATHNAME = 'test/fixtures/sample-app'
+
   def test_run_ls_long_format
     # Output example
     # total 816
