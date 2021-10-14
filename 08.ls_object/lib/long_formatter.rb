@@ -42,10 +42,10 @@ module LS
     def format_row(file, max_nlink, max_user, max_group, max_size)
       [
         file.info[:type_and_mode],
-        "  #{file.info[:nlink].to_s.rjust(max_nlink)}",
+        "  #{file.info[:nlink].rjust(max_nlink)}",
         " #{file.info[:user].ljust(max_user)}",
         "  #{file.info[:group].ljust(max_group)}",
-        "  #{file.info[:size].to_s.rjust(max_size)}",
+        "  #{file.info[:size].rjust(max_size)}",
         " #{file.info[:mtime]}",
         " #{file.info[:basename]}"
       ].join

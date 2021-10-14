@@ -32,8 +32,8 @@ module LS
         file_path: file_path,
         group: Etc.getgrgid(@stat.gid).name,
         mtime: @stat.mtime.strftime('%m %e %R'),
-        nlink: @stat.nlink,
-        size: @stat.size,
+        nlink: @stat.nlink.to_s,
+        size: @stat.size.to_s,
         type_and_mode: format_type_and_mode(file_path),
         user: Etc.getpwuid(@stat.uid).name
       }

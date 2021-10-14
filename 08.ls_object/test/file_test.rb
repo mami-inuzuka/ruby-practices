@@ -28,11 +28,11 @@ class LsFileTest < Minitest::Test
   end
 
   def test_nlink
-    assert_equal 1, @file_info[:nlink]
+    assert_equal "1", @file_info[:nlink]
   end
 
   def test_size
-    assert_equal 2336, @file_info[:size]
+    assert_equal "2336", @file_info[:size]
   end
 
   def test_type_and_mode
