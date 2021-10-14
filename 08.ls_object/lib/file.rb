@@ -29,7 +29,6 @@ module LS
       {
         basename: ::File.basename(file_path),
         blocks: @stat.blocks,
-        file_path: file_path,
         group: Etc.getgrgid(@stat.gid).name,
         mtime: @stat.mtime.strftime('%m %e %R'),
         nlink: @stat.nlink.to_s,

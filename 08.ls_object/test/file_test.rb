@@ -15,10 +15,6 @@ class LsFileTest < Minitest::Test
     assert_equal "README.md", @file_info[:basename]
   end
 
-  def test_file_path
-    assert_equal "test/fixtures/sample-app/README.md", @file_info[:file_path]
-  end
-
   def test_group
     assert_equal "staff", @file_info[:group]
   end
