@@ -20,7 +20,8 @@ module LS
       if @params[:long_format]
         LS::LongFormatter.new(pathname: pathname, reverse: @params[:reverse], dot_match: @params[:dot_match]).list
       else
-        LS::ShortFormatter.new(pathname: pathname, width: window_width, reverse: @params[:reverse], dot_match: @params[:dot_match]).list
+        LS::ShortFormatter.new(pathname: pathname, width: window_width, reverse: @params[:reverse],
+                               dot_match: @params[:dot_match]).list
       end
     end
 
