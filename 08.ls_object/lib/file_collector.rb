@@ -8,7 +8,7 @@ module LS
   # 指定されたパス、パラメーターに合わせてFileオブジェクトを集めてくるクラス
   #
   class FileCollector
-    attr_reader :files, :paths, :max_length_list, :total_blocks
+    attr_reader :files, :paths
 
     def initialize(pathname:, reverse: false, dot_match: false)
       @files = collect_files(pathname: pathname, dot_match: dot_match, reverse: reverse)
