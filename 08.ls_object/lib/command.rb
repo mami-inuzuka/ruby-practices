@@ -10,14 +10,14 @@ module LS
     attr_reader :params
 
     def initialize(argv)
-      @params = set_params
+      @params = set_params(argv)
     end
 
     def execute
       if @params[:long_format]
         LS::LongFormatter.new(pathname: pathname, reverse: @params[:reverse], dot_match: @params[:dot_match]).list
       else
-        LS::ShortFormatter.new(pathname: pathname, width: window_width,  reverse: @params[:reverse], dot_match: @params[:dot_match]).list
+        LS::ShortFormatter.new(pathname: pathname, width: window_width, reverse: @params[:reverse], dot_match: @params[:dot_match]).list
       end
     end
 
@@ -31,7 +31,7 @@ module LS
       IO.console.winsize[1]
     end
 
-    def set_params
+    def set_params(argv)
       params = { long_format: false, reverse: false, dot_match: false }
       opt = OptionParser.new
       opt.on('-a') { |v| params[:dot_match] = v }

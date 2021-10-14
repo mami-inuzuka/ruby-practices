@@ -23,7 +23,7 @@ module LS
     end
 
     def total_blocks
-      @files.map { |file| file.blocks }.sum
+      @files.map(&:blocks).sum
     end
 
     private
