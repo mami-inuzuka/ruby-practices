@@ -8,7 +8,7 @@ class LsFileTest < Minitest::Test
   TARGET_PATHNAME = 'test/fixtures/sample-app/README.md'
 
   def setup
-    @file_info = LS::File.new(TARGET_PATHNAME).file_info
+    @file_info = LS::File.new(TARGET_PATHNAME).info
   end
 
   def test_basename
