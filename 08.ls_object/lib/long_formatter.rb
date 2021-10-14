@@ -35,19 +35,19 @@ module LS
         @collected_files.max_length_list[key]
       end
       @collected_files.files.map do |file|
-        format_row(file, *max_sizes)
+        format_row(file.info, *max_sizes)
       end.join("\n")
     end
 
-    def format_row(file, max_nlink, max_user, max_group, max_size)
+    def format_row(data, max_nlink, max_user, max_group, max_size)
       [
-        file.info[:type_and_mode],
-        "  #{file.info[:nlink].rjust(max_nlink)}",
-        " #{file.info[:user].ljust(max_user)}",
-        "  #{file.info[:group].ljust(max_group)}",
-        "  #{file.info[:size].rjust(max_size)}",
-        " #{file.info[:mtime]}",
-        " #{file.info[:basename]}"
+        data[:type_and_mode],
+        "  #{data[:nlink].rjust(max_nlink)}",
+        " #{data[:user].ljust(max_user)}",
+        "  #{data[:group].ljust(max_group)}",
+        "  #{data[:size].rjust(max_size)}",
+        " #{data[:mtime]}",
+        " #{data[:basename]}"
       ].join
     end
   end
