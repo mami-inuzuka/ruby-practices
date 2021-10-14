@@ -3,6 +3,9 @@
 require 'etc'
 
 module LS
+  #
+  # ファイルについての情報を取得するクラス
+  #
   class File
     attr_reader :max_sizes, :file_path, :basename, :type_and_mode, :nlink, :user, :group, :size, :mtime, :blocks
 

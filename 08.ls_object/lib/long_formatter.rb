@@ -3,6 +3,9 @@
 require './lib/file_collector'
 
 module LS
+  #
+  # lオプションが指定された時のフォーマットに変換するクラス
+  #
   class LongFormatter
     MODE_TABLE = {
       '0' => '---',

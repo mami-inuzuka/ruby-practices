@@ -4,6 +4,9 @@ require 'pathname'
 require './lib/file'
 
 module LS
+  #
+  # 指定されたパス、パラメーターに合わせてFileオブジェクトを集めてくるクラス
+  #
   class FileCollector
     attr_reader :files, :paths, :max_length_list, :total_blocks
 

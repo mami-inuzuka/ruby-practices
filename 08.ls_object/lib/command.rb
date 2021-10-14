@@ -6,6 +6,9 @@ require './lib/long_formatter'
 require './lib/short_formatter'
 
 module LS
+  #
+  # オプションやパスを受け取りLSコマンドを実行するクラス
+  #
   class Command
     attr_reader :params
 

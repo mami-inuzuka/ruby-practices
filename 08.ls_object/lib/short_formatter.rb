@@ -3,6 +3,9 @@
 require './lib/file_collector'
 
 module LS
+  #
+  # デフォルトのフォーマットに変換するクラス
+  #
   class ShortFormatter
     MARGIN_BETWEEN_FILE_NAME = 7
 
