@@ -24,7 +24,14 @@ module LS
 
     def list
       total = "total #{@collected_files.total_blocks}"
-      body = @collected_files.files.map do |file|
+      body = render_body
+      [total, body].join("\n")
+    end
+
+    private
+
+    def render_body
+      @collected_files.files.map do |file|
         [
           file.info[:type_and_mode],
           "  #{file.info[:nlink].to_s.rjust(@collected_files.max_length_list[:nlink])}",
@@ -35,7 +42,6 @@ module LS
           " #{file.info[:basename]}"
         ].join
       end.join("\n")
-      [total, body].join("\n")
     end
   end
 end
