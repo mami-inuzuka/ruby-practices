@@ -3,7 +3,7 @@
 require 'minitest/autorun'
 require './lib/long_formatter'
 
-class LsCommandTest < Minitest::Test
+class LsLongFormatterTest < Minitest::Test
   TARGET_PATHNAME = 'test/fixtures/sample-app'
 
   def test_run_ls_long_format

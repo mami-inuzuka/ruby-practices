@@ -3,7 +3,7 @@
 require 'minitest/autorun'
 require './lib/short_formatter'
 
-class ShortFormatTest < Minitest::Test
+class LsShortFormatterTest < Minitest::Test
   TARGET_PATHNAME = 'test/fixtures/sample-app'
 
   def test_run_ls_width_150

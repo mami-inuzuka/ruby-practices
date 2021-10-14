@@ -4,7 +4,7 @@ require 'minitest/autorun'
 require 'pathname'
 require './lib/file_collector'
 
-class LsFileTest < Minitest::Test
+class LsFileCollectorTest < Minitest::Test
   TARGET_PATHNAME = 'test/fixtures/sample-app'
 
   def setup
