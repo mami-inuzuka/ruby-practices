@@ -31,17 +31,24 @@ module LS
     private
 
     def render_body
+      max_sizes = %i[nlink user group size].map do |key|
+        @collected_files.max_length_list[key]
+      end
       @collected_files.files.map do |file|
-        [
-          file.info[:type_and_mode],
-          "  #{file.info[:nlink].to_s.rjust(@collected_files.max_length_list[:nlink])}",
-          " #{file.info[:user].ljust(@collected_files.max_length_list[:user])}",
-          "  #{file.info[:group].ljust(@collected_files.max_length_list[:group])}",
-          "  #{file.info[:size].to_s.rjust(@collected_files.max_length_list[:size])}",
-          " #{file.info[:mtime]}",
-          " #{file.info[:basename]}"
-        ].join
+        format_row(file, *max_sizes)
       end.join("\n")
+    end
+
+    def format_row(file, max_nlink, max_user, max_group, max_size)
+      [
+        file.info[:type_and_mode],
+        "  #{file.info[:nlink].to_s.rjust(max_nlink)}",
+        " #{file.info[:user].ljust(max_user)}",
+        "  #{file.info[:group].ljust(max_group)}",
+        "  #{file.info[:size].to_s.rjust(max_size)}",
+        " #{file.info[:mtime]}",
+        " #{file.info[:basename]}"
+      ].join
     end
   end
 end
