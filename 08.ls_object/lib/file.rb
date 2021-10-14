@@ -7,7 +7,7 @@ module LS
   # ファイルについての情報を取得するクラス
   #
   class File
-    attr_reader :max_sizes, :file_path, :basename, :type_and_mode, :nlink, :user, :group, :size, :mtime, :blocks
+    attr_reader :info
 
     MODE_TABLE = {
       '0' => '---',
@@ -21,16 +21,22 @@ module LS
     }.freeze
 
     def initialize(file_path)
+      @info = file_info_table(file_path)
+    end
+
+    def file_info_table(file_path)
       stat = ::File::Stat.new(file_path)
-      @basename = ::File.basename(file_path)
-      @blocks = stat.blocks
-      @file_path = file_path
-      @group = Etc.getgrgid(stat.gid).name
-      @mtime = stat.mtime.strftime('%m %e %R')
-      @nlink = stat.nlink
-      @size = stat.size
-      @type_and_mode = format_type_and_mode(file_path)
-      @user = Etc.getpwuid(stat.uid).name
+      {
+        basename: ::File.basename(file_path),
+        blocks: stat.blocks,
+        file_path: file_path,
+        group: Etc.getgrgid(stat.gid).name,
+        mtime: stat.mtime.strftime('%m %e %R'),
+        nlink: stat.nlink,
+        size: stat.size,
+        type_and_mode: format_type_and_mode(file_path),
+        user: Etc.getpwuid(stat.uid).name
+      }
     end
 
     private

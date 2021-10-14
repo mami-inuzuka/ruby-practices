@@ -26,13 +26,13 @@ module LS
     end
 
     def total_blocks
-      @files.map(&:blocks).sum
+      @files.map { |file| file.info[:blocks] }.sum
     end
 
     private
 
     def find_max_size(key)
-      @files.map { |file| file.send(key).to_s.size }.max
+      @files.map { |file| file.info[key].to_s.size }.max
     end
 
     def collect_file_paths(pathname:, dot_match: flase, reverse: false)

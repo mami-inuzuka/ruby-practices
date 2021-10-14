@@ -26,13 +26,13 @@ module LS
       total = "total #{@collected_files.total_blocks}"
       body = @collected_files.files.map do |file|
         [
-          file.type_and_mode,
-          "  #{file.nlink.to_s.rjust(@collected_files.max_length_list[:nlink])}",
-          " #{file.user.ljust(@collected_files.max_length_list[:user])}",
-          "  #{file.group.ljust(@collected_files.max_length_list[:group])}",
-          "  #{file.size.to_s.rjust(@collected_files.max_length_list[:size])}",
-          " #{file.mtime}",
-          " #{file.basename}"
+          file.info[:type_and_mode],
+          "  #{file.info[:nlink].to_s.rjust(@collected_files.max_length_list[:nlink])}",
+          " #{file.info[:user].ljust(@collected_files.max_length_list[:user])}",
+          "  #{file.info[:group].ljust(@collected_files.max_length_list[:group])}",
+          "  #{file.info[:size].to_s.rjust(@collected_files.max_length_list[:size])}",
+          " #{file.info[:mtime]}",
+          " #{file.info[:basename]}"
         ].join
       end.join("\n")
       [total, body].join("\n")
