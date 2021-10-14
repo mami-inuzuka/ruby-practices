@@ -12,8 +12,8 @@ module LS
   class Command
     attr_reader :params
 
-    def initialize(argv)
-      @params = set_params(argv)
+    def initialize
+      @params = set_params
     end
 
     def execute
@@ -35,7 +35,7 @@ module LS
       IO.console.winsize[1]
     end
 
-    def set_params(argv)
+    def set_params
       params = { long_format: false, reverse: false, dot_match: false }
       opt = OptionParser.new
       opt.on('-a') { |v| params[:dot_match] = v }

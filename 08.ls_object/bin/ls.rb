@@ -3,4 +3,4 @@
 
 require './lib/command'
 
-puts LS::Command.new(ARGV).execute
+puts LS::Command.new.execute
