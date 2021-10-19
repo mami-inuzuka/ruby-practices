@@ -13,7 +13,7 @@ module LS
     attr_reader :params
 
     def initialize
-      @params = set_params
+      set_params
     end
 
     def execute
@@ -36,7 +36,7 @@ module LS
     end
 
     def set_params
-      params = { long_format: false, reverse: false, dot_match: false }
+      @params = { long_format: false, reverse: false, dot_match: false }
       opt = OptionParser.new
       opt.on('-a') { |v| params[:dot_match] = v }
       opt.on('-l') { |v| params[:long_format] = v }
