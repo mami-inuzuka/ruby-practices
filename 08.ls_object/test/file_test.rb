@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require 'etc'
 require 'minitest/autorun'
 require 'pathname'
 require_relative '../lib/file'
@@ -9,6 +10,7 @@ class LsFileTest < Minitest::Test
 
   def setup
     @file_info = LS::File.new(TARGET_PATHNAME).info
+    @stat = ::File::Stat.new(TARGET_PATHNAME)
   end
 
   def test_basename
@@ -20,7 +22,7 @@ class LsFileTest < Minitest::Test
   end
 
   def test_mtime
-    assert_equal "10 11 17:35", @file_info[:mtime]
+    assert_equal "10 19 17:48", @file_info[:mtime]
   end
 
   def test_nlink
@@ -32,7 +34,7 @@ class LsFileTest < Minitest::Test
   end
 
   def test_type_and_mode
-    assert_equal "-rw-rw-r--", @file_info[:type_and_mode]
+    assert_equal "-rw-r--r--", @file_info[:type_and_mode]
   end
 
   def test_user
