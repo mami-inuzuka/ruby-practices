@@ -25,6 +25,8 @@ module LS
       @info = file_info_table(file_path)
     end
 
+    private
+
     def file_info_table(file_path)
       {
         basename: ::File.basename(file_path),
@@ -37,8 +39,6 @@ module LS
         user: Etc.getpwuid(@stat.uid).name
       }
     end
-
-    private
 
     def format_type_and_mode(file_path)
       pathname = Pathname(file_path)

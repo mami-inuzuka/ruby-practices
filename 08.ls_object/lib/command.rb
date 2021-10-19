@@ -10,8 +10,6 @@ module LS
   # オプションやパスを受け取りLSコマンドを実行するクラス
   #
   class Command
-    attr_reader :params
-
     def initialize
       set_params
     end
