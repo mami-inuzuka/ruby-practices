@@ -2,8 +2,8 @@
 
 require 'io/console'
 require 'optparse'
-require './lib/long_formatter'
-require './lib/short_formatter'
+require_relative 'long_formatter'
+require_relative 'short_formatter'
 
 module LS
   #

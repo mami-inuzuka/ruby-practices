@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require 'minitest/autorun'
-require './lib/short_formatter'
+require_relative '../lib/short_formatter'
 
 class LsShortFormatterTest < Minitest::Test
   TARGET_PATHNAME = 'test/fixtures/sample-app'

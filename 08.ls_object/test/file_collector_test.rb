@@ -2,7 +2,7 @@
 
 require 'minitest/autorun'
 require 'pathname'
-require './lib/file_collector'
+require_relative '../lib/file_collector'
 
 class LsFileCollectorTest < Minitest::Test
   TARGET_PATHNAME = 'test/fixtures/sample-app'

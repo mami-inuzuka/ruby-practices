@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require 'pathname'
-require './lib/file'
+require_relative 'file'
 
 module LS
   #

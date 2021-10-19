@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require './lib/file_collector'
+require_relative 'file_collector'
 
 module LS
   #
