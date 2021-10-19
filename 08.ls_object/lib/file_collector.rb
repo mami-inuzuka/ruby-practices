@@ -44,9 +44,7 @@ module LS
 
     def collect_files(pathname:, dot_match: false, reverse: false)
       file_paths = collect_file_paths(pathname: pathname, dot_match: dot_match, reverse: reverse)
-      file_paths.map do |file_path|
-        LS::File.new(file_path)
-      end
+      file_paths.map { |file_path| LS::File.new(file_path) }
     end
   end
 end
