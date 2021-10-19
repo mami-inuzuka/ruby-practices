@@ -31,12 +31,8 @@ module LS
     private
 
     def render_body
-      max_sizes = %i[nlink user group size].map do |key|
-        @collected_files.max_length_list[key]
-      end
-      @collected_files.files.map do |file|
-        format_row(file.info, *max_sizes)
-      end.join("\n")
+      max_sizes = %i[nlink user group size].map { |key| @collected_files.max_length_list[key] }
+      @collected_files.files.map { |file| format_row(file.info, *max_sizes) }.join("\n")
     end
 
     def format_row(data, max_nlink, max_user, max_group, max_size)

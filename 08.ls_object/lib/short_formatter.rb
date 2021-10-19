@@ -21,9 +21,7 @@ module LS
     private
 
     def format_table(file_paths, max_basename_count)
-      file_paths.map do |row_files|
-        render_short_format_row(row_files, max_basename_count)
-      end.join("\n")
+      file_paths.map { |row_files| render_short_format_row(row_files, max_basename_count) }.join("\n")
     end
 
     def render_short_format_row(row_files, max_basename_count)
