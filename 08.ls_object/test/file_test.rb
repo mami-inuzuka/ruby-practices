@@ -22,7 +22,8 @@ class LsFileTest < Minitest::Test
   end
 
   def test_mtime
-    assert_equal "10 19 17:48", @file_info[:mtime]
+    pattern = /^\d{1,2} \d{1,2} [0-9]{2}:[0-9]{2}$/
+    assert_match pattern, @file_info[:mtime]
   end
 
   def test_nlink
