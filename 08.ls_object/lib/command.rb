@@ -40,7 +40,7 @@ module LS
       opt.on('-l') { |v| params[:long_format] = v }
       opt.on('-r') { |v| params[:reverse] = v }
       opt.parse!(ARGV)
-      params
+      @params
     end
   end
 end
