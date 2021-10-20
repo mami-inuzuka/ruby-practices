@@ -15,14 +15,10 @@ module LS
     end
 
     def list
-      format_table(transposed_file_paths, max_basename_count)
+      transposed_file_paths.map { |row_files| render_short_format_row(row_files, max_basename_count) }.join("\n")
     end
 
     private
-
-    def format_table(file_paths, max_basename_count)
-      file_paths.map { |row_files| render_short_format_row(row_files, max_basename_count) }.join("\n")
-    end
 
     def render_short_format_row(row_files, max_basename_count)
       row_files.map do |file_path|
