@@ -10,7 +10,6 @@ class LsFileTest < Minitest::Test
 
   def setup
     @file_info = LS::File.new(TARGET_PATHNAME).info
-    @stat = ::File::Stat.new(TARGET_PATHNAME)
   end
 
   def test_basename
