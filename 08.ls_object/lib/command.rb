@@ -36,11 +36,10 @@ module LS
     def set_params
       @params = { long_format: false, reverse: false, dot_match: false }
       opt = OptionParser.new
-      opt.on('-a') { |v| params[:dot_match] = v }
-      opt.on('-l') { |v| params[:long_format] = v }
-      opt.on('-r') { |v| params[:reverse] = v }
+      opt.on('-a') { |v| @params[:dot_match] = v }
+      opt.on('-l') { |v| @params[:long_format] = v }
+      opt.on('-r') { |v| @params[:reverse] = v }
       opt.parse!(ARGV)
-      @params
     end
   end
 end
